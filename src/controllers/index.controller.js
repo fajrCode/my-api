@@ -1,10 +1,11 @@
 import { getData } from '../services/index.service.js';
 
-export const index = (req, res) => {
-    const data = getData();
+export const index = async (req, res) => {
+    const data = await getData();
 
     res.status(200).json({
         message: data.message,
-        data: data.user
+        data: data.user,
+        payload: req.admin
     });
 };
