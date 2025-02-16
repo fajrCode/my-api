@@ -5,7 +5,7 @@ export const auth = async (req, res, next) => {
     try {
         const { authorization } = req.headers;
 
-        if(!authorization) throw error401('Please authenticate.');
+        if (!authorization) throw error401('Please authenticate.');
 
         const token = authorization.split(' ')[1];
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
@@ -17,6 +17,6 @@ export const auth = async (req, res, next) => {
 
         next();
     } catch (error) {
-        next(error);
+        next(error401('Token invalid, please login.'));
     }
 }
